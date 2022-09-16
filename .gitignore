@@ -1,0 +1,17 @@
+## PyCharm
+.idea/
+.idea/hunty_apptest.iml
+## __pycache__
+__pycache__/
+*.py[cod]
+*$py.class
+
+## Environments
+.env
+.venv
+env/
+venv/
+
+## Mongo_config
+mongo_config/
+mongo_data/
