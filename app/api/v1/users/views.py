@@ -3,7 +3,7 @@ from starlette.responses import JSONResponse
 from app.core.handlers import ProcessHandler
 from fastapi.encoders import jsonable_encoder
 from app.core.responses import response_format
-from app.api.v1.users.serializers import Users
+from app.api.v1.users.serializers import User
 from fastapi import APIRouter, Response, status, Request
 
 router = APIRouter()
@@ -36,7 +36,7 @@ def list_user(request: Request, response: Response):
     response_class=JSONResponse,
     tags=["User"],
 )
-def create_user(model: Users, response: Response):
+def create_user(model: User, response: Response):
     """
     Create a new user
     """
@@ -58,7 +58,7 @@ def create_user(model: Users, response: Response):
     response_class=JSONResponse,
     tags=["User"],
 )
-def update_user(model: Users, response: Response, uuid: UUID):
+def update_user(model: User, response: Response, uuid: UUID):
     """
     Update user
     """
@@ -82,7 +82,7 @@ def update_user(model: Users, response: Response, uuid: UUID):
 )
 def delete_user(response: Response, uuid: UUID):
     """
-    Update user
+    Delete user
     """
     result = ProcessHandler.delete_users(uuid)
     response.status_code = status.HTTP_202_ACCEPTED

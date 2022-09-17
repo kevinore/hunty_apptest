@@ -14,10 +14,8 @@ def root():
         {
             'success': True,
             'message': 'Hunty test app',
-            'data': "Hey root"
+            'data': "Service running successfully"
         }
     )
-
-
 
 

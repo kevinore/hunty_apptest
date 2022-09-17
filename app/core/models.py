@@ -6,6 +6,7 @@ from mongoengine import (
     DateTimeField,
     UUIDField,
     ListField,
+    IntField
 )
 
 
@@ -26,23 +27,23 @@ class MetaModel:
 
 class User(Document, MetaModel):
     firstName = StringField(
-        title='First Name of user',
+        title="First Name of user",
         required=True
     )
     lastName = StringField(
-        title='last Name of user',
+        title="last Name of user",
         required=True
     )
     email = StringField(
-        title='Email of user',
+        title="Email of user",
         required=True
     )
     yearsPreviousExperience = StringField(
-        title='Years previous experience',
+        title="Years previous experience",
         required=True
     )
     skills = ListField(
-        title='Skills of user',
+        title="Skills of user",
         required=True
     )
 
@@ -59,6 +60,52 @@ class User(Document, MetaModel):
                         },
                         {
                             "nosql": 2
+                        }
+                ]
+            }
+        }
+
+
+class Job(Document, MetaModel):
+    positionName = StringField(
+        title="Position name",
+        required=True
+    )
+    companyName = StringField(
+        title="Company Name of job",
+        required=True
+    )
+    salary = IntField(
+        title="Salary of job",
+        required=True
+    )
+    currency = StringField(
+        title="Years previous experience",
+        required=True
+    )
+    vacancyLink = StringField(
+        title="Vacancy link of job",
+        required=True
+    )
+    requiredSkills = ListField(
+        title="Skills of user",
+        required=True
+    )
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "positionName": "Python Dev",
+                "companyName": "Test company",
+                "Salary": 9999999,
+                "currency": "COP",
+                "vacancyLink": "https://www.test.com",
+                "requiredSkills": [
+                        {
+                            "Python": 1
+                        },
+                        {
+                            "NoSQL": 2
                         }
                 ]
             }
