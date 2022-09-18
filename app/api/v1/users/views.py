@@ -54,7 +54,7 @@ def create_user(model: User, response: Response):
 
 @router.put(
     "/user/{uuid}",
-    description="Update user",
+    description="Update user, {uuid} of user",
     response_class=JSONResponse,
     tags=["User"],
 )
@@ -76,7 +76,7 @@ def update_user(model: User, response: Response, uuid: UUID):
 
 @router.delete(
     "/user/delete/{uuid}",
-    description="Delete user",
+    description="Delete user, {uuid} of user",
     response_class=JSONResponse,
     tags=["User"],
 )

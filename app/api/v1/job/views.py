@@ -54,7 +54,7 @@ def create_user(model: Job, response: Response):
 
 @router.put(
     "/job/{uuid}",
-    description="Update job",
+    description="Update job, {uuid} of job",
     response_class=JSONResponse,
     tags=["Job"],
 )
@@ -76,7 +76,7 @@ def job_user(model: Job, response: Response, uuid: UUID):
 
 @router.delete(
     "/job/delete/{uuid}",
-    description="Delete job",
+    description="Delete job, {uuid} of job",
     response_class=JSONResponse,
     tags=["Job"],
 )
@@ -97,7 +97,7 @@ def delete_job(response: Response, uuid: UUID):
 
 @router.get(
     "/job/filter/{uuid}",
-    description="Return job by filter (skills, experience) based on user info",
+    description="Return job using filter (skills, experience), {uuid} of user",
     response_class=JSONResponse,
     tags=["Job"],
 )
