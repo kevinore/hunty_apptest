@@ -1,5 +1,4 @@
-import pandas as pd
-from uuid import uuid4
+from uuid import uuid4, UUID
 from datetime import datetime
 from app.core.exceptions import exception
 from app.core.models import User, Job
@@ -50,7 +49,7 @@ class ProcessHandler:
         return user
 
     @classmethod
-    def update_users(cls, uuid, serializer: dict):
+    def update_users(cls, uuid: UUID, serializer: dict):
         """
         Update user
         """
@@ -77,7 +76,7 @@ class ProcessHandler:
         }
 
     @classmethod
-    def delete_users(cls, uuid):
+    def delete_users(cls, uuid: UUID):
         """
         Delete user
         """
@@ -111,7 +110,7 @@ class ProcessHandler:
         return list(map(lambda job: cls.__remove_unnecessary_fields(job), jobs))
 
     @classmethod
-    def filter_job(cls, uuid):
+    def filter_job(cls, uuid: UUID):
         """
         Return job based on User skills experience
         """
@@ -122,8 +121,22 @@ class ProcessHandler:
         user_orm = ModelsQuerys(User)
         user = user_orm.find_by_query(query_user)
 
+        if not user:
+            exception(
+                "User does not exists",
+                {"uui": uuid},
+                409
+            )
+
         job_orm = ModelsQuerys(Job)
         jobs = job_orm.find_all()
+
+        if not jobs:
+            exception(
+                "Job does not exists",
+                {"uui": uuid},
+                409
+            )
 
         list_job = []
         for user_skills in user[0]["skills"]:
@@ -145,7 +158,7 @@ class ProcessHandler:
         return list_job
 
     @staticmethod
-    def __remove_unnecessary_fields(job):
+    def __remove_unnecessary_fields(job: dict):
         job.__delitem__('_id')
         job.__delitem__('updated_at')
         job.__delitem__('created_at')
@@ -185,7 +198,7 @@ class ProcessHandler:
         }
 
     @classmethod
-    def update_job(cls, uuid, serializer: dict):
+    def update_job(cls, uuid: UUID, serializer: dict):
         """
         Update user
         """
@@ -215,7 +228,7 @@ class ProcessHandler:
         }
 
     @classmethod
-    def delete_job(cls, uuid):
+    def delete_job(cls, uuid: UUID):
         """
         Delete user
         """
