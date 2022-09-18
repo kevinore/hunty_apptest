@@ -121,8 +121,22 @@ class ProcessHandler:
         user_orm = ModelsQuerys(User)
         user = user_orm.find_by_query(query_user)
 
+        if not user:
+            exception(
+                "User does not exists",
+                {"uui": uuid},
+                409
+            )
+
         job_orm = ModelsQuerys(Job)
         jobs = job_orm.find_all()
+
+        if not jobs:
+            exception(
+                "Job does not exists",
+                {"uui": uuid},
+                409
+            )
 
         list_job = []
         for user_skills in user[0]["skills"]:
