@@ -12,9 +12,9 @@ router = APIRouter()
 def root():
     return response_format(
         {
-            'success': True,
-            'message': 'Hunty test app',
-            'data': "Service running successfully"
+            "success": True,
+            "message": "Service running successfully",
+            "data": {}
         }
     )
 
